@@ -104,6 +104,11 @@ jobs:
               build-args: BASE_IMAGE=${{ matrix.base_image }}
               no-cache: true
 
+          - name: Check gh auth status
+            run: gh auth status
+            env:
+              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
           - name: Create GitHub Release
             run: |
               gh release create "${{ steps.release.outputs.next_tag }}" \
